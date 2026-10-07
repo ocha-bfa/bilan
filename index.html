@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bilan interactif 2026 — Burkina Faso</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Roboto+Condensed:wght@400;700&display=swap">
+<link rel="stylesheet" href="style.css?v=20260925a">
+</head>
+<body>
+<div class="chrome" id="chrome">
+  <div class="brand"><b>BILAN 2026</b><span>Burkina Faso · HumanBase</span></div>
+  <div class="lens" role="tablist" aria-label="Perspective">
+    <button id="tab-global" aria-pressed="true" data-lens="global">Global</button>
+    <button id="tab-fin" aria-pressed="false" data-lens="fin">Financement</button>
+    <button id="tab-cluster" aria-pressed="false" data-lens="cluster">Clusters</button>
+    <button id="tab-region" aria-pressed="false" data-lens="region">Régions</button>
+  </div>
+  <div class="months" id="months" aria-label="Mois"></div>
+  <label class="pick" id="pick-cluster" hidden>Cluster <select id="sel-cluster"></select></label>
+  <label class="pick" id="pick-region" hidden>Région <select id="sel-region"></select></label>
+  <span class="status" id="status"></span>
+  <button class="print" id="btn-print" type="button">Imprimer cette vue</button>
+  <button class="print" id="btn-print-all" type="button">Tout imprimer</button>
+</div>
+
+<div class="stage" id="stage"><div class="sheets" id="sheets">
+
+<!-- ===== GLOBAL 1/2 : RÉPONSE ===== -->
+<article class="paper on" data-lens="global" data-title="Vue globale · réponse">
+  <section class="view" id="v-g1">
+    <p class="narr wide" id="g-narr"></p>
+    <div>
+      <div class="sec">Personnes ciblées · personnes priorisées</div>
+      <div class="kpis" id="g-kpis"></div>
+    </div>
+    <div>
+      <div class="sec">Atteints selon la sévérité des besoins <small>intersectoriel</small></div>
+      <div class="sevcmp" id="g-sev"></div>
+    </div>
+    <div class="wide">
+      <div class="sec">Clusters — personnes ciblées et priorisées (sévérité 4)</div>
+      <div class="tbl" id="g-table" style="--rh:22px"></div>
+      <div class="keyline"><span><i style="background:var(--cible)"></i>Cible</span><span><i style="background:var(--att-d)"></i>Atteints en zone de sévérité 4</span><span><i style="background:var(--att)"></i>Atteints en zone de sévérité ≤ 3</span><span><i style="background:var(--prio)"></i>Cible priorisée</span><span><i style="background:var(--prio-l)"></i>Atteints dans la cible priorisée</span><span style="margin-left:auto">cliquer un cluster → perspective Clusters</span></div>
+    </div>
+    <div class="wide">
+      <div class="sec">Progression cumulée 2026 <small>personnes atteintes, intersectoriel</small></div>
+      <div class="tl" id="g-tl"></div>
+    </div>
+  </section>
+</article>
+
+<!-- ===== GLOBAL 2/2 : GÉOGRAPHIE ===== -->
+<article class="paper on" data-lens="global" data-title="Vue globale · géographie et sévérité">
+  <section class="view" id="v-g2">
+    <div>
+      <div class="sec">Personnes atteintes par région <small>% de la cible intersectorielle</small></div>
+      <div id="g-map"></div>
+      <div class="legend"><span><i style="background:#F5F7F4;outline:1px solid #ddd"></i>0 %</span><span><i style="background:#DCE8C9"></i>1–20 %</span><span><i style="background:#BBD39A"></i>21–40 %</span><span><i style="background:#8DB33A"></i>41–60 %</span><span><i style="background:#4E7A1B"></i>&gt; 60 %</span><span style="margin-left:auto">cliquer une région → perspective Régions</span></div>
+    </div>
+    <div class="stack">
+      <div>
+        <div class="sec">Régions — ciblées et priorisées</div>
+        <div class="tbl" id="g-rtable" style="--rh:17px"></div>
+      </div>
+      <div>
+        <div class="sec">Répartition des atteints par niveau de sévérité <small>sév. 2 · 3 · 4</small></div>
+        <div class="stk" id="g-stk"></div>
+      </div>
+    </div>
+  </section>
+</article>
+
+<!-- ===== FINANCEMENT ===== -->
+<article class="paper" data-lens="fin" data-title="Financement du plan de réponse">
+  <section class="view" id="v-fin">
+    <div class="top">
+      <div class="kpis" id="f-kpis"></div>
+      <div class="info" id="f-info"></div>
+    </div>
+    <div>
+      <div class="sec">Financement par cluster <small>USD, FTS</small></div>
+      <div class="tbl" id="f-table" style="--rh:19px"></div>
+      <div class="keyline"><span><i style="background:var(--req)"></i>Fonds requis</span><span><i style="background:var(--fin)"></i>Fonds reçus</span><span style="margin-left:auto">cliquer un cluster → ses bailleurs et organisations ; cliquer « Plan 2026 » → tout le plan</span></div>
+    </div>
+    <div class="stack">
+      <div>
+        <div class="sec">Contribution des donateurs (Top 10) — <span id="f-sel-1"></span> <small>flux entrants</small></div>
+        <div class="hb" id="f-donors"></div>
+      </div>
+      <div>
+        <div class="sec">Bénéficiaires de financement (Top 10) — <span id="f-sel-2"></span> <small>destinataires directs</small></div>
+        <div class="hb" id="f-recip"></div>
+      </div>
+      <div class="keyline" id="f-note"></div>
+    </div>
+  </section>
+</article>
+
+<!-- ===== CLUSTER ===== -->
+<article class="paper" data-lens="cluster" data-title="Perspective cluster">
+  <section class="view" id="v-cluster">
+    <div class="top">
+      <div class="kpis" id="c-kpis"></div>
+      <div class="dis" id="c-dis"></div>
+    </div>
+    <div class="stack">
+      <div>
+        <div class="sec">Atteints par région — <span id="c-name-1"></span></div>
+        <div id="c-map"></div>
+      </div>
+      <div class="split">
+        <div><div class="sec">Bailleurs du cluster <small>FTS</small></div><div class="hb sm" id="c-donors"></div></div>
+        <div><div class="sec">Organisations financées <small>FTS</small></div><div class="hb sm" id="c-recip"></div></div>
+      </div>
+      <div>
+        <div class="sec">Progression cumulée 2026</div>
+        <div class="tl" id="c-tl"></div>
+      </div>
+    </div>
+    <div class="stack">
+      <div>
+        <div class="sec">Régions — ciblées et priorisées</div>
+        <div class="tbl" id="c-table" style="--rh:15px"></div>
+      </div>
+      <div><div class="sec">Atteints selon la sévérité</div><div class="sevcmp" id="c-sev"></div></div>
+      <div><div class="sec">Indicateurs clés du cluster <small id="c-ind-date"></small></div><div class="ind" id="c-ind"></div></div>
+    </div>
+  </section>
+</article>
+
+<!-- ===== RÉGION ===== -->
+<article class="paper" data-lens="region" data-title="Perspective régionale">
+  <section class="view" id="v-region">
+    <div class="top">
+      <div class="kpis" id="r-kpis"></div>
+      <div style="display:flex;align-items:center;gap:10px"><div id="r-loc" aria-hidden="true"></div><div style="font-size:10px;color:var(--ink2);width:110px;line-height:1.3">Localisation<br><span id="r-name-1" style="color:var(--ink);font-weight:500"></span></div></div>
+    </div>
+    <div class="stack">
+      <div>
+        <div class="sec">Provinces — ciblées, priorisées, sévérité des besoins</div>
+        <div class="tbl" id="r-prov"></div>
+      </div>
+      <div>
+        <div class="sec">Atteints selon la sévérité</div>
+        <div class="sevcmp" id="r-sev"></div>
+      </div>
+      <div>
+        <div class="sec">Provinces — sévérité des besoins et % atteint</div>
+        <div id="r-map"></div>
+        <div class="legend"><span><i style="background:#BBD9F2"></i>Sévérité 2</span><span><i style="background:#5B9BD5"></i>Sévérité 3</span><span><i style="background:#1F4E79"></i>Sévérité 4</span></div>
+      </div>
+    </div>
+    <div class="stack">
+      <div>
+        <div class="sec">Clusters dans la région (<span id="r-name-2"></span>)</div>
+        <div class="tbl" id="r-table"></div>
+      </div>
+      <div><div class="sec">Progression cumulée 2026</div><div class="tl" id="r-tl"></div></div>
+    </div>
+  </section>
+</article>
+
+<!-- ===== RÉGION 2/2 : INDICATEURS ===== -->
+<article class="paper" data-lens="region" data-title="Perspective régionale · indicateurs">
+  <section class="view" id="v-region2" style="grid-template-rows:auto 1fr;gap:10px">
+    <div class="sec">Réalisation par indicateur clé et par cluster — <span id="r-name-3"></span> <small id="r-ind-date"></small></div>
+    <div class="ind" id="r-ind"></div>
+  </section>
+</article>
+
+</div></div>
+<script src="data/geo_bfa.js?v=20260925a"></script>
+<script src="app.js?v=20260925a"></script>
+</body>
+</html>
