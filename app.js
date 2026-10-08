@@ -326,7 +326,7 @@ function render(){
   fit();
 }
 document.querySelectorAll('.paper').forEach(p=>{
-  p.insertAdjacentHTML('afterbegin',`<div class="head"><div><h1>BURKINA FASO</h1><div class="sub">Suivi de la réponse humanitaire</div></div><div class="right"><div class="lensname"></div><div class="period"></div></div></div>`);
+  p.insertAdjacentHTML('afterbegin',`<div class="head"><div><h1>BURKINA FASO</h1><div class="sub">Suivi de la réponse humanitaire</div></div><div class="right"><div class="lensname"></div><div class="period"></div><div class="online">Pour en savoir plus, version interactive : <a href="https://response.reliefweb.int/burkina-faso/bilan-de-la-reponse-humanitaire" target="_blank" rel="noopener">response.reliefweb.int/burkina-faso/bilan-de-la-reponse-humanitaire</a></div></div></div>`);
   p.insertAdjacentHTML('beforeend',`<div class="foot"><span>Les désignations et les limites administratives utilisées n'impliquent pas une reconnaissance officielle par l'Organisation des Nations Unies.</span><span><b>Date de création :</b> ${new Date().toLocaleDateString('fr-FR',{day:'numeric',month:'long',year:'numeric'})} &nbsp; <b>Sources :</b> Clusters, FTS, HPC 2026 &nbsp; <b>Feedback :</b> ocha-burkinafaso@un.org</span></div>`);
 });
 document.querySelectorAll('.lens button').forEach(b=>b.addEventListener('click',()=>setLens(b.dataset.lens)));

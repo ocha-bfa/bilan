@@ -42,6 +42,9 @@ button:focus-visible,select:focus-visible{outline:2px solid var(--ocha);outline-
 .head .right{text-align:right}
 .head .lensname{font-family:var(--cond);font-size:12px;text-transform:uppercase;letter-spacing:.12em;color:var(--ink2)}
 .head .period{font-size:15px;font-style:italic;color:var(--ocha-txt)}
+/* lien vers la version interactive (ReliefWeb Response) — sur chaque feuille, cliquable dans le PDF, lisible sur papier */
+.head .online{font-size:10.5px;color:var(--ink2);margin-top:3px}
+.head .online a{color:var(--ocha-txt);text-decoration:none;font-weight:500}
 .foot{margin-top:auto;border-top:1px solid var(--line);padding-top:5px;font-size:8.5px;color:var(--ink2);display:flex;justify-content:space-between;gap:16px}
 .foot b{color:var(--ink)}
 .view{display:grid;flex:1;min-height:0}
